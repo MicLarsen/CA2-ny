@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Person</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body>
+
+        <div class="pageWrapper">
+            <div class="pageHeader">Add new person</div>
+            <div class="pageContent">
+                <div>
+                    Firstname : <input id="firstname" type="text">
+                    Lastname : <input id="lastname" type="text">
+                </div>
+                <div>    
+                    Address : <input id="address" type="text">
+                    Additonal info : <input id="addInfo" type="text">
+                    City : <Select id="cityinfo"></select>
+                </div>
+                <div>
+                    Email : <input id="email" type="email">
+                </div>
+                <label>Phones</label>
+                <button id="addPhone">add phonenumber</button>
+                <form id="phones">
+                    <div id="phoneAdded"></div>   
+                </form>
+
+                <label>Hobbies</label>
+                <button id="addHobby">add hobby</button>
+                <form id="hobbies">
+                    <div id="hobbyAdded"></div>
+                </form>
+                <button id="submitPerson">submit Person</button>
+            </div>
+        </div>
+        <script src="js/addPersonScript.js" type="text/javascript"></script>
+    </body>
+</html>
