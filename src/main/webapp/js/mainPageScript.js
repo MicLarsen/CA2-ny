@@ -29,21 +29,11 @@ $(document).ready(function () {
         $("#mainContent").load("webDocumentation/jsonFormat.html");
     })
     
-    $("#unitTest").click(function() {
+    $("#test").click(function() {
         
-        $("#mainContent").load("webDocumentation/test/unitTest.html");
+        $("#mainContent").load("webDocumentation/test/test.html");
     })
-    
-    $("#facadeTest").click(function() {
         
-        $("#mainContent").load("webDocumentation/test/testDBFacade.html");
-    })
-    
-    $("#restTest").click(function() {
-        
-        $("#mainContent").load("webDocumentation/test/testRestAPI.html");
-    })
-    
     $("#whoDidWhat").click(function() {
         
         $("#mainContent").load("webDocumentation/whoDidWhat.html");
@@ -52,11 +42,6 @@ $(document).ready(function () {
     $("#inheritance").click(function() {
         
         $("#mainContent").load("webDocumentation/inheritance.html");
-    })
-    
-    $("#howToDemo").click(function() {
-        
-        $("#mainContent").load("webDocumentation/howToDemo.html");
     })
     
     $("#getPerson").click(function() {

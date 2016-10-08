@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -11,6 +6,106 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="pageHeader">Documentation for the REST API</div>
+        <div class="pageHeader">
+            Documentation for the REST API
+        </div>
+        <div class='pageContent'>
+            <p>
+                The REST-api (REpresentational State Transfer)
+            </p>
+            <p>
+                We decided to make three different REST classes, so we could keep a relatively loose coupling and high cohesion.
+                <br>
+                Relativelit loose coupling since REST is a decoupling arcitectual design that takes less bandwith than SOAP (Simple Object Access Protocol).
+                <br>
+                REST typically runs over HTTP have a few architectual contraints which is:
+            </p>
+            <ul>
+                <li>Decouples consumers from producers</li>
+                <li>Stateless existence, which means that each packets travels without reference to other packages in the same way as the IP</li>
+                <li>Able to leverage a cache</li>
+                <li>Leverages a layered system</li>
+                <li>Leverages a uniform interface</li>
+            </ul>
+            <p class="header">
+                PersonRest:
+            </p>
+            <p>
+                Here we handle all the request concerning Persons.
+            </p>
+            <ul> 
+                <li>
+                    getPersonById(int id)                        
+                </li>
+                <li>
+                    getPersonByPhone(int phoneNum)                        
+                </li>
+                <li>
+                    getAllPersonWithHobby(Hobby hobby)                        
+                </li>
+                <li>
+                    getPersonsByZip(int zipCode)                        
+                </li>
+                <li>
+                    getHobbyCount(Hobby hobby)                        
+                </li>
+                <li>
+                    deletePerson(int id)
+                </li>
+                <li>
+                    editPerson(int id)
+                </li>
+                <li>
+                    addPerson(Person person)
+                </li>                    
+            </ul>
+            <p class="header">
+                CompanyRest:
+            </p>
+            <p>
+                Here we handle all the request concerning Company.
+            </p>
+            <ul> 
+                <li>
+                    getCompanyByCVR(int cvr)
+                </li>
+                <li>
+                    getCompanyByPhone(int phone)                        
+                </li>
+                <li>
+                    getCompaniesWithXOrMoreEmpl(int num);
+                </li>
+                <li>
+                    deleteCompany(int cvr);
+                </li>
+                <li>     
+                    editCompany(Company comp);
+
+                </li>
+                <li>
+                    createCompany(Company comp);                        
+                </li>
+                <li>
+                    editPerson(int id)
+                </li>
+                <li>
+                    addPerson(Person person)
+                </li>                    
+            </ul>
+            <p class="header">
+                OtherInfoRest:
+            </p>
+            <p>
+                Here we populate our dropdown scroll menu with the cityinfo data from the database.
+            </p>
+            <ul> 
+                <li>
+                    getCityInfo()
+                </li>                    
+            </ul>
+
+
+
+        </div>
     </body>
 </html>
