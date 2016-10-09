@@ -38,13 +38,13 @@ public class PersonRest {
     Person person;
     Person aPerson;
     List<Person> somePersons;
+    List<Object[]> hobbyPersons;
     List<Person> persons;
     List<Hobby> hobbies;
     List<Phone> phones;
     List<String> hobbyList;
     Gson gsonBuilder;
     InfoEntity ie;
-    
 
     @Context
     private UriInfo context;
@@ -67,22 +67,19 @@ public class PersonRest {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/hobby/{hobby}")
     public Object getPersonsByHobby(@PathParam("hobby") String hobby) {
-        System.out.println("hobby is: " + hobby);        
-        this.somePersons = pjpa.getAllPersonWithHobby("hobby");
-
+this.somePersons = pjpa.getAllPersonWithHobby(hobby);
         if (somePersons != null) {
-            
-            this.person = new Person(aPerson.getId(), aPerson.getFirstName(),
-                    aPerson.getLastName(), new Address(aPerson.getAddress().getStreet(),
-                            aPerson.getAddress().getAdditionalInfo()));
-
-            return gsonBuilder.toJson(person);
+            for (int i = 0; i < somePersons.size() ; i++) {        
+                this.persons.add(new Person(somePersons.get(i).getId(), somePersons.get(i).getFirstName(),
+                    somePersons.get(i).getLastName(), new Address(somePersons.get(i).getAddress().getStreet(),
+                            somePersons.get(i).getAddress().getAdditionalInfo())));
+            }
+            return gsonBuilder.toJson(persons);
         } else {
-            System.out.println("dfssfsdf");
             throw new GenericInputException(new ErrorMessage("", 500, "No person found with id " + id).toString());
         }
     }
-    
+
     /**
      *
      * @return
@@ -98,10 +95,10 @@ public class PersonRest {
 
             return gsonBuilder.toJson(hobbyList);
         } else {
-            throw new GenericInputException(new ErrorMessage("", 500, "No Hobbys was found" ).toString());
+            throw new GenericInputException(new ErrorMessage("", 500, "No Hobbys was found").toString());
         }
     }
-    
+
     /**
      *
      * @param id
@@ -210,20 +207,27 @@ public class PersonRest {
 
     }
 
-    @DELETE
+//    @DELETE
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Path("delete")
+//    public boolean deletePerson(@QueryParam("id") int id) {
+//
+//        boolean isDeleted = true; //= pr.deletePerson(id);
+//        if (isDeleted) {
+//            return true;
+//        } else {
+//            //cast Exception 
+//            return false;
+//        }
+//    }
+    
+       @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("delete")
-    public boolean deletePerson(@QueryParam("id") int id
-    ) {
-
-        boolean isDeleted = true; //= pr.deletePerson(id);
-        if (isDeleted) {
-            return true;
-        } else {
-            //cast Exception 
-            return false;
-        }
+    public void deletePerson(@QueryParam("id") int id) {
+        Person deleted = pjpa.deletePerson(id);
     }
+    
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -234,5 +238,5 @@ public class PersonRest {
 //        fp.editPerson(editedPerson);
         return null;
     }
-    
+
 }

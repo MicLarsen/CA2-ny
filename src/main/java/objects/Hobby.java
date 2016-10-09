@@ -16,8 +16,8 @@ public class Hobby {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private int id;
+    protected int id;
+    
     private String name;
     private String description;
     
@@ -29,10 +29,6 @@ public class Hobby {
     public Hobby(String name , String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
