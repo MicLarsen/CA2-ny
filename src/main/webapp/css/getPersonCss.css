@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+}
+
+.idField{
+ width: 30px;   
+}
+
+#listOfPersons {
+    margin-left: 33%;
+}

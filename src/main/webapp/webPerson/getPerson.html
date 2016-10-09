@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Get Person</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link href="css/getPersonCss.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>Get stuff from a Person</div>
-        
+        <div>Get stuff from a Person</div>       
         <div>
-                <button id="loadSimpelList">get simpel information</button>
-                <button id="loadFullList">get Full information</button>
-            </div>
-            <br>
-            <p id="listWrapper"></p>
-            <script src="js/getPersonScript.js" type="text/javascript"></script>
+            <button id="loadSinglePerson">get Person by ID</button>
+            <input class="idField" id="id" type="number">
+            <button id="loadFullList">get All Persons</button>
+        </div>
+        <div>         
+            <button id="loadPersonByPhone">get Person by Phonenumber</button>
+            <input class="phoneField" id="phoneChosen" type="number">
+        </div>
+        <div>         
+            <button id="loadPersonByhOBBY">get Persons with same hobby</button>
+             List of Hobbies : <Select id="hobbyList"></select>
+        </div>
+        <br>
+        <p id="imageText"></p>
+        <p id="listWrapper"></p>
+        <script src="js/getPersonScript.js" type="text/javascript"></script>
     </body>
 </html>

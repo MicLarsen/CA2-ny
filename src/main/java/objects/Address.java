@@ -31,10 +31,14 @@ public class Address {
     
     public Address(){}
     
-    public Address(String Street, String AdditionalInfo, CityInfo cityInfo) {
+    public Address(String Street, String AdditionalInfo) {
         this.cityInfo = cityInfo;
         this.Street = Street;
         this.AdditionalInfo = AdditionalInfo;
+    }
+    public Address(String Street, String AdditionalInfo, CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
+        this.Street = Street;
     }
 
     public int getId() {

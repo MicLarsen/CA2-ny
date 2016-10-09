@@ -18,8 +18,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import objects.Address;
+import objects.ErrorMessage;
 import objects.Hobby;
 import objects.InfoEntity;
+import static objects.InfoEntity_.id;
 import objects.Person;
 import objects.Phone;
 
@@ -34,11 +37,14 @@ public class PersonRest {
     PersonJPA pjpa;
     Person person;
     Person aPerson;
+    List<Person> somePersons;
     List<Person> persons;
     List<Hobby> hobbies;
     List<Phone> phones;
+    List<String> hobbyList;
     Gson gsonBuilder;
     InfoEntity ie;
+    
 
     @Context
     private UriInfo context;
@@ -48,6 +54,7 @@ public class PersonRest {
         this.pjpa = new PersonJPA();
         this.hobbies = new ArrayList<>();
         this.phones = new ArrayList<>();
+        this.persons = new ArrayList<>();
         this.gsonBuilder = new GsonBuilder().create();
     }
 
@@ -58,15 +65,92 @@ public class PersonRest {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/hobby/{hobby}")
+    public Object getPersonsByHobby(@PathParam("hobby") String hobby) {
+        System.out.println("hobby is: " + hobby);        
+        this.somePersons = pjpa.getAllPersonWithHobby("hobby");
+
+        if (somePersons != null) {
+            
+            this.person = new Person(aPerson.getId(), aPerson.getFirstName(),
+                    aPerson.getLastName(), new Address(aPerson.getAddress().getStreet(),
+                            aPerson.getAddress().getAdditionalInfo()));
+
+            return gsonBuilder.toJson(person);
+        } else {
+            System.out.println("dfssfsdf");
+            throw new GenericInputException(new ErrorMessage("", 500, "No person found with id " + id).toString());
+        }
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/hobbyList")
+    public Object getPersonById() {
+
+        this.hobbyList = pjpa.getAllHobbies();
+
+        if (hobbyList != null) {
+
+            return gsonBuilder.toJson(hobbyList);
+        } else {
+            throw new GenericInputException(new ErrorMessage("", 500, "No Hobbys was found" ).toString());
+        }
+    }
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Object getPersonById(@PathParam("id") int id) {
 
-        Person p = pjpa.getPersonById(id);
+        this.aPerson = pjpa.getPersonById(id);
 
-        System.out.println("rest: " + p.getFirstName());
-        System.out.println("hello there");
-        return this.gsonBuilder.toJson(p);
+        if (aPerson != null) {
 
+            this.person = new Person(aPerson.getId(), aPerson.getFirstName(),
+                    aPerson.getLastName(), new Address(aPerson.getAddress().getStreet(),
+                            aPerson.getAddress().getAdditionalInfo()));
+
+            return gsonBuilder.toJson(person);
+        } else {
+            throw new GenericInputException(new ErrorMessage("", 500, "No person found with id " + id).toString());
+        }
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/all")
+    public Object getAllPersons() {
+
+        this.somePersons = pjpa.getAllPersons();
+        if (somePersons != null) {
+
+            for (int i = 0; i < somePersons.size(); i++) {
+
+                this.persons.add(new Person(somePersons.get(i).getId(),
+                        somePersons.get(i).getFirstName(), somePersons.get(i).getLastName(),
+                        new Address(somePersons.get(i).getAddress().getStreet(),
+                                somePersons.get(i).getAddress().getAdditionalInfo())));
+            }
+
+            return gsonBuilder.toJson(persons);
+        } else {
+            throw new GenericInputException(new ErrorMessage("", 500, "No person found with id " + id).toString());
+        }
     }
 
     @GET
@@ -77,20 +161,6 @@ public class PersonRest {
         return gsonBuilder.toJson(p);
     }
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("getPWithHobby")
-//    public Object getPersonsByHobby(@PathParam("hobby") Hobby hobby) {
-//        List<Person> p = pjpa.getAllPersonWithHobby(hobby);
-//        return gsonBuilder.toJson(p);
-//    }
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("hobbyCount")
-//    public Object getHobbyCount(@PathParam("hobby") Hobby hobby) {
-//        int count = pjpa.getHobbyCount(hobby);
-//        return gsonBuilder.toJson(count);
-//    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -135,8 +205,8 @@ public class PersonRest {
         if (aPerson.getAddress() == null) {
             throw new GenericInputException("Missing address property.");
         }
-               
-       pjpa.addPerson(aPerson);
+
+        pjpa.addPerson(aPerson);
 
     }
 
@@ -164,5 +234,5 @@ public class PersonRest {
 //        fp.editPerson(editedPerson);
         return null;
     }
-
+    
 }

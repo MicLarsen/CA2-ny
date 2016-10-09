@@ -14,7 +14,7 @@ public interface PersonFacade {
 
     public Person getPersonByPhone(int phoneNum);
 
-    public List<Person> getAllPersonWithHobby(Hobby hobby);
+    public List<Person> getAllPersonWithHobby(String hobby);
 
     public List<Person> getPersonsByZip(int zipCode);
 
@@ -25,4 +25,8 @@ public interface PersonFacade {
     public Person editPerson(int id);
 
     public boolean addPerson(Person person);
+    
+    public List<Person> getAllPersons();
+    
+    public List<String> getAllHobbies();
 }

@@ -73,7 +73,7 @@ public class OtherInfoRest {
 
         } else {
 
-            //throw new NotFoundException(city);x
+            //throw new NotFoundException(city);
         }
         return returnObject;
     }

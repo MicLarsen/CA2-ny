@@ -45,8 +45,9 @@ public class CompanyRest {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("getByCVR")
+    @Path("{cvr}")
     public Object getCompanyByCVR(@PathParam("cvr") int cvr) {
+        System.out.println("helllo");
         Company c = cjpa.getCompanyByCVR(cvr);
         if (c != null) {
             return gsonBuilder.toJson(c);

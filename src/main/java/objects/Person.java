@@ -25,14 +25,33 @@ public class Person extends InfoEntity {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    public Person(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    public Person(int id, String firstName, String lastName, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+    }
 
-    public Person(String firstName, String lastName, Address address, List<Hobby> hobbies, List<Phone> phones) {
+    public Person(String firstName, String lastName, Address address, List<Hobby> hobbies, String email, List<Phone> phones) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.hobbies = hobbies;
         this.email = email;
         this.phones = phones;
+    }
+    
+    public Person(String firstName, String lastName, Address address, List<Hobby> hobbies, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.hobbies = hobbies;
+        this.email = email;
     }
 
     public int getId() {
